@@ -1,0 +1,17 @@
+name: Add package
+on: 
+  repository_dispatch:
+    types: [add_package]
+jobs:
+  add-package:
+    name: Add package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: greet
+        run: echo hello world!
+
+      - name: Download package
+        run: curl -LiO ${{ github.event.client_payload.download_url }}
