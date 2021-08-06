@@ -1,0 +1,4 @@
+# setup script for http://debian.hnicke.de/debian
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5B08767916BCFCE7
+echo "deb http://debian.hnicke.de/debian unstable main" >> /etc/apt/sources.list
+apt-get update

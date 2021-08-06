@@ -1,0 +1,50 @@
+#!/bin/bash
+set -eu
+cd $HOME
+
+
+deb_dir=$HOME/packages
+repo_dir=$HOME/debian
+keyserver=keyserver.ubuntu.com
+repo_name=hnicke
+distribution=unstable
+component=main
+uri=http://debian.hnicke.de
+repo_uri=$uri/debian
+
+[ -d "$deb_dir" ] || { echo "Mount the deb package directory to $deb_dir." >&2; exit 1; }
+
+echo -n "$GPG_SIGNING_KEY" | base64 -d | gpg1 --import
+
+
+echo 
+echo "##############"
+echo "Updating repo "
+echo "##############"
+echo
+
+aptly repo create \
+    -component="$component" \
+    -distribution="$distribution" \
+    $repo_name
+
+aptly repo add $repo_name $deb_dir
+
+aptly repo show $repo_name
+
+aptly publish repo \
+    -architectures="amd64" \
+    $repo_name
+
+cp -r ~/.aptly/public/* $repo_dir/
+
+release_sig_path=$(find $repo_dir/dists -name Release.gpg | head -1) 
+gpg_key_id=$(gpg1 --list-packets $release_sig_path | grep -oP "(?<=keyid ).+")
+
+
+echo "# setup script for $repo_uri" > $repo_dir/go
+cat >> $repo_dir/go <<-END
+apt-key adv --keyserver $keyserver --recv-keys $gpg_key_id
+echo "deb $repo_uri $distribution $component" >> /etc/apt/sources.list
+apt-get update
+END

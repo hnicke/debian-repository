@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eu
+cd "$(dirname "$(readlink -f "$0")")"
+
+image=debian-repository
+
+
+( cd docker && docker build -t $image .; )
+
+docker run \
+    -it \
+    -e HOST_UID=$(id -u $USER) \
+    -e HOST_GID=$(id -g $USER) \
+    -e GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)" \
+    -e URI=http://localhost:8000/apt \
+    -v $PWD/packages:/debian-repository/packages:ro \
+    -v $PWD/debian:/debian-repository/debian \
+    $image
