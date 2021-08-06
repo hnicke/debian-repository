@@ -3,10 +3,11 @@ set -eu
 
 user=debian-repository
 home_dir=/debian-repository
+repo_dir=$home_dir/repo
 
 addgroup $user --gid 1000
 adduser debian-repository --uid 1000 --gid 1000 --home $home_dir --disabled-password --gecos ""
-chown $user:$user $home_dir 
+chown $user:$user $home_dir $home_dir
 chmod 700 $home_dir
 
 exec gosu $user /scripts/update_repository
