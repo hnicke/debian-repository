@@ -10,8 +10,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: greet
-        run: echo hello world!
-
       - name: Download package
-        run: curl -LiO ${{ github.event.client_payload.download_url }}
+        id: download-package
+        run: |
+          cd packages
+          package_url=${{ github.event.client_payload.download_url }}
+          package_name=${package_url##*/}
+          curl -LiO ${{ github.event.client_payload.download_url }}
+          echo "::set-output name=package_name::$package_name"
+
+      - name: Add package
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: packages/*.deb
+          commit_message: Add deb package ${{ steps.download-package.outputs.package_name }}
