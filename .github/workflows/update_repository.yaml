@@ -7,7 +7,9 @@ jobs:
   update-repository:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
 
       - name: build docker image
         run: ./build_docker
@@ -22,3 +24,4 @@ jobs:
         with:
           file_pattern: repo/
           commit_message: update debian repository
+          branch: master
