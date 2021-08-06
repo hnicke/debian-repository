@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
 
       - name: download package
         id: download-package
@@ -26,4 +28,3 @@ jobs:
         with:
           file_pattern: packages/*.deb
           commit_message: add package ${{ steps.download-package.outputs.package_name }}
-          token: ${{ secrets.PAT }}
