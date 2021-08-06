@@ -17,7 +17,8 @@ jobs:
           cd packages
           package_url=${{ github.event.client_payload.download_url }}
           package_name=${package_url##*/}
-          curl -LiO ${{ github.event.client_payload.download_url }}
+          echo "Downloading package '$package_name' from '$package_url'"
+          curl -LiO $package_url
           echo "::set-output name=package_name::$package_name"
 
       - name: Add package

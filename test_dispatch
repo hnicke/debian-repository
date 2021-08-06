@@ -1,0 +1,11 @@
+#!/bin/bash
+set -eu
+
+curl \
+  -X POST \
+  https://api.github.com/repos/hnicke/debian-repository/dispatches \
+  -d '{"event_type":"add_package"}' \
+  -u "hnicke:$GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github.v3+json" \
+  -i
+
