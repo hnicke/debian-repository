@@ -1,8 +1,9 @@
 # hnicke's debian repository
 
 
-### content
+### contains
 - [sodalite](https://github.com/hnicke/sodalite)
+ 
  
  
 ### how to add
