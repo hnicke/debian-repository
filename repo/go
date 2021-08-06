@@ -1,4 +1,4 @@
 # setup script for http://debian.hnicke.de/repo/
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5B08767916BCFCE7
-echo "deb http://debian.hnicke.de/repo/ unstable main" >> /etc/apt/sources.list
+echo "deb [arch=amd64] http://debian.hnicke.de/repo/ unstable main" > /etc/apt/sources.list.d/sodalite.list
 apt-get update
