@@ -1,16 +1,16 @@
-name: Add package
+name: add package
 on: 
   repository_dispatch:
     types: [add_package]
 jobs:
   add-package:
-    name: Add package
+    name: add package
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v2
 
-      - name: Download package
+      - name: download package
         id: download-package
         run: |
           mkdir -p packages
@@ -18,11 +18,12 @@ jobs:
           package_url=${{ github.event.client_payload.download_url }}
           package_name=${package_url##*/}
           echo "Downloading package '$package_name' from '$package_url'"
-          curl -LiO $package_url
+          curl -LO $package_url
           echo "::set-output name=package_name::$package_name"
 
-      - name: Add package
+      - name: commit and push package
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: packages/*.deb
-          commit_message: Add package ${{ steps.download-package.outputs.package_name }}
+          commit_message: add package ${{ steps.download-package.outputs.package_name }}
+          token: ${{ secrets.PAT }}

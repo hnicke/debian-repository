@@ -1,18 +1,13 @@
 #!/bin/bash
-set -eu
-cd "$(dirname "$(readlink -f "$0")")"
+set -e
 
-image=debian-repository
-
-
-( cd docker && docker build -t $image .; )
+[ $GPG_SIGNING_KEY ] || GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)"
 
 docker run \
     -it \
     -e HOST_UID=$(id -u $USER) \
     -e HOST_GID=$(id -g $USER) \
-    -e GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)" \
-    -e URI=http://localhost:8000/apt \
+    -e GPG_SIGNING_KEY="$GPG_SIGNING_KEY" \
     -v $PWD/packages:/debian-repository/packages:ro \
     -v $PWD/repo:/debian-repository/repo \
-    $image
+    debian-repository
