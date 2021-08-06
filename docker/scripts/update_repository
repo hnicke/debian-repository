@@ -36,6 +36,10 @@ aptly publish repo \
     -architectures="amd64" \
     $repo_name
 
+echo whoami? $(whoami)
+echo uid? $(id -u $UID)
+echo gid? $(id -g $UID)
+ls -Rl $repo_dir
 cp -r ~/.aptly/public/* $repo_dir/
 
 release_sig_path=$(find $repo_dir/dists -name Release.gpg | head -1) 
