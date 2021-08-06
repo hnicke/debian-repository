@@ -4,7 +4,11 @@ set -eu
 curl \
   -X POST \
   https://api.github.com/repos/hnicke/debian-repository/dispatches \
-  -d '{"event_type":"add_package"}' \
+  -d '{"event_type":"add_package",
+       "client_payload": {
+          "download_url": "https://github.com/hnicke/sodalite/releases/download/v0.21.26/sodalite_0.21.26_all.deb"
+        }
+      }' \
   -u "hnicke:$GITHUB_TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   -i
