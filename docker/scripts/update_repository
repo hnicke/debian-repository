@@ -49,6 +49,6 @@ gpg_key_id=$(gpg1 --list-packets $release_sig_path | grep -oP "(?<=keyid ).+")
 echo "# setup script for $repo_uri" > $repo_dir/go
 cat >> $repo_dir/go <<-END
 apt-key adv --keyserver $keyserver --recv-keys $gpg_key_id
-echo "deb $repo_uri $distribution $component" >> /etc/apt/sources.list
+echo "deb [arch=amd64] $repo_uri $distribution $component" > /etc/apt/sources.list.d/sodalite.list
 apt-get update
 END
