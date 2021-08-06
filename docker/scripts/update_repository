@@ -4,13 +4,13 @@ cd $HOME
 
 
 deb_dir=$HOME/packages
-repo_dir=$HOME/debian
+repo_dir=$HOME/repo
 keyserver=keyserver.ubuntu.com
 repo_name=hnicke
 distribution=unstable
 component=main
 uri=http://debian.hnicke.de
-repo_uri=$uri/debian
+repo_uri=$uri/$(basename $repo_dir)/
 
 [ -d "$deb_dir" ] || { echo "Mount the deb package directory to $deb_dir." >&2; exit 1; }
 

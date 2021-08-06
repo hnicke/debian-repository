@@ -14,5 +14,5 @@ docker run \
     -e GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)" \
     -e URI=http://localhost:8000/apt \
     -v $PWD/packages:/debian-repository/packages:ro \
-    -v $PWD/debian:/debian-repository/debian \
+    -v $PWD/repo:/debian-repository/repo \
     $image
