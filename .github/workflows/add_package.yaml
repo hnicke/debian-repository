@@ -13,6 +13,7 @@ jobs:
       - name: Download package
         id: download-package
         run: |
+          mkdir -p packages
           cd packages
           package_url=${{ github.event.client_payload.download_url }}
           package_name=${package_url##*/}
