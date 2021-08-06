@@ -4,6 +4,35 @@ Section: utils
 Installed-Size: 306
 Maintainer: Heiko Nickerl <dev@hnicke.de>
 Architecture: all
+Version: 0.21.30
+Depends: python3-binaryornot, python3-blinker, python3-click, python3-pygments, python3-pyperclip, python3-urwid, python3-watchdog, python3-yaml, python3.9
+Filename: pool/main/s/sodalite/sodalite_0.21.30_all.deb
+Size: 71708
+MD5sum: ecd9c8f79023154c039d71244c504350
+SHA1: d401a3ba4123d9e0a6195d32bbf36fa599b0acba
+SHA256: 289e2a507c46212ae3fb6152d0c68fba9438c40c162ec476e72b43351495401a
+SHA512: 78b2aedc4ed7c934b3d65cb5ae588c9fafb98ca1494b09d02c78b576134080b8891f1ebe314e550b0c150e16d71056c4446b06ebfc2090b6d9d9ab829f99a938
+Description: Keyboard-driven terminal file navigator and launcher
+ Sodalite is a keyboard-driven terminal file navigator and launcher.
+ It's designed to be the missing glue for those who use the shell
+ as their daily driver and seek more speed and ease.
+ In a nutshell, sodalite assigns a key to each entry.
+ Pressing a key navigates to the corresponding entry.
+ The assignments are permanent but can be changed to your liking.
+ .
+ Next to fast navigation, sodalite brings file preview
+ with syntax highlighting and a pluggable hook system.
+ .
+ Sodalite is designed as an extension to your shell.
+ After installation, don't forget to enable its shell integration.
+Homepage: https://www.github.com/hnicke/sodalite
+
+Package: sodalite
+Priority: optional
+Section: utils
+Installed-Size: 306
+Maintainer: Heiko Nickerl <dev@hnicke.de>
+Architecture: all
 Version: 0.21.29
 Depends: python3-binaryornot, python3-blinker, python3-click, python3-pygments, python3-pyperclip, python3-urwid, python3-watchdog, python3-yaml, python3.9
 Filename: pool/main/s/sodalite/sodalite_0.21.29_all.deb
