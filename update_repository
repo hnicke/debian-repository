@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-[ $GPG_SIGNING_KEY ] || GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)"
+[ "$GPG_SIGNING_KEY" ] || GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)"
 
 docker run \
     -it \
