@@ -4,7 +4,6 @@ set -e
 [ "$GPG_SIGNING_KEY" ] || GPG_SIGNING_KEY="$(gpg --export-secret-key --armor debian@hnicke.de | base64)"
 
 docker run \
-    -it \
     -e HOST_UID=$(id -u $USER) \
     -e HOST_GID=$(id -g $USER) \
     -e GPG_SIGNING_KEY="$GPG_SIGNING_KEY" \
