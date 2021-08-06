@@ -14,7 +14,7 @@ repo_uri=$uri/$(basename $repo_dir)/
 
 [ -d "$deb_dir" ] || { echo "Mount the deb package directory to $deb_dir." >&2; exit 1; }
 
-echo -n "$GPG_SIGNING_KEY" | base64 -d | gpg1 --import
+echo -n "${GPG_SIGNING_KEY:?No signing key provided}" | base64 -d | gpg1 --import
 
 
 echo 
